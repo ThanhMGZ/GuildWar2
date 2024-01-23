@@ -1,0 +1,8 @@
+name: GuildWar2
+version: '${project.version}'
+main: org.thanhmagics.guildwar2.GuildWar2
+api-version: '1.20'
+commands:
+  banghoi:
+    usage: /<command>
+    aliases: bh

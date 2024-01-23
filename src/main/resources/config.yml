@@ -1,0 +1,152 @@
+#-------------------------------#
+# quy tắc config x,y,z:
+#   - phải có x1 nhỏ hơn x2
+#   - phải có z1 nhỏ hơn z2
+#   - điểm y cho số gì cũng được
+#-------------------------------#
+war:
+  world: 'world'
+  arena: 'x,y,z;x,y,z'
+  camp:
+    1:
+      location: 'x,y,z;x,y,z'
+      title_location: 'x,y,z' # đặt các armor stand ghi thông tin của khu vực
+      time: 2000 #<- ms (đứng trong area 20s để chiếm đc)
+      title: # mỗi 1 dòng xuống sẽ trừ 0.4 giá trị y của armor stand
+        - '&ekhu vực số 1'
+        - '&6đang bị chiếm bởi:&f {guild}'
+  start: '19:30' #giờ:phút
+  end: '30' #phút
+  reward: # {guild_name} ở line nào trước thì top trước, {guild_name} và {point} phải chung hàng trong config!
+    - '&d------------------'
+    - '&c&l ĐẠI CHIẾN BANG HỘI'
+    - ' '
+    - '&cTOP 1 &7-&f {guild_name} &b({point} Điểm)'
+    - '&6TOP 2 &7-&f {guild_name} &b({point} Điểm)'
+    - '&fTOP 3 &7-&f {guild_name} &b({point} Điểm)'
+    - '&d------------------'
+  reward_point:
+    camp: 15
+    kill: 2
+  message1: '&aĐang Tiến Hành Chiếm Khu Vực: &7({progress}%)'
+  message2: '&aChiếm Thành Công!!!!!!!!'
+  message3: '&aĐại Chiến Bang Hội Bắt Đầu Trong &6{time}'
+  message4:
+    - '&6--------------------'
+    - '&aĐại Chiến Bang Hội Đã Bắt Đầu!'
+    - '&6--------------------'
+gui:
+  list:
+    title: '&aDanh Sách Các Bang Hội'
+    next_page:
+      material: 'ARROW'
+      displayname: '&atrang tiếp theo'
+      lore:
+        - '&e ấn để qua trang tiếp theo (nếu có)'
+    previous_page:
+      material: 'ARROW'
+      displayname: '&atrang trước đó'
+      lore:
+        - '&e ấn để quay lại trang trước đó (nếu có)'
+    guild:
+      material: 'PLAYER_HEAD' # sau này update
+      displayname: '{guild_name}'
+      lore:
+        - '&7'
+        - '&7 Số Kill: &6{guild_kill}'
+        - '&7 Số Khu Vực Đã Chiếm: &6{guild_camped}'
+        - '&7 Số Điểm: &6{guild_point}'
+        - '&7'
+        - '&7 Thành Viên: '
+        - ' &7 -&6 {guild_member}'
+        - ' '
+        - '&eẤn Để Xin Vào {/} &cBang Hội Này Đã Full! {/} &cBạn Đã Ở Trong Một Bang Hội!'
+    deco:
+      material: 'GRAY_STAINED_GLASS_PANE'
+      displayname: '&a'
+      lore: []
+    info:
+      material: 'PAPER'
+      displayname: '&a đây là bang hội'
+      lore:
+        - '&7 luật chơi là.....(chưa config)'
+  setting:
+    title: '&aCài Đặt Bang Hội'
+    invite:
+      material: 'PAPER'
+      displayname: '&aMời Thêm Người Vào Bang Hội'
+      lore: []
+    kick:
+      material: 'PAPER'
+      displayname: '&aKick Thành Viên Trong Bang Hội Ra'
+      lore: []
+    rename:
+      material: 'PAPER'
+      displayname: '&aChỉnh Sửa Tên Của Bang Hội'
+      lore: []
+    transfer:
+      material: 'PAPER'
+      displayname: '&aChuyển Quyền Đội Trưởng'
+      lore: []
+    disband:
+      material: 'PAPER'
+      displayname: '&cGiải Tán Bang Hội'
+      lore: []
+  select:
+    title: 'Lựa Chọn'
+    player:
+      material: 'PLAYER_HEAD'
+      displayname: '&a{player_name}'
+      lore:
+        - '&a'
+        - '&eClick Để Chọn'
+command:
+  help:
+    - '&6/bh list&7 để xem danh sách các bang hội'
+    - '&6/bh join [tên_thành_viên]&7 xin vào bang hội có thành viên như tên'
+    - '&6/bh create &7 tạo bang hội riêng của bạn'
+    - '&6/bh war&7 xem thời gian diễn ra đại chiến bang hội'
+    - '&6/bh chat&7 bật/tắt chat bang hội'
+    - '&6/bh setting&7 cài đặt bang hội của bạn'
+    - '&6/bh leave&7 thoát bang hội'
+chat: '&b[BANG HỘI] > {name}&7:&f {chat}'
+guild:
+  max_member: 20
+  message1:
+    - '&b------------------'
+    - '&6 {name} &aXin Vào Bang Hội Của Bạn'
+    - '&6{/Click Vào Đây/}&a Để Đồng Ý'
+    - '&b------------------'
+  message2:
+    - '&b------------------'
+    - '&a Chào mừng&6 {name}&a đã đến với bang hội!'
+    - '&b------------------'
+  message3:
+    - '&b------------------'
+    - '&aBang Hội&6 {name}&a đã mời bạn vào'
+    - '&6{/ấn vao đây/}&a để tham gia'
+    - '&b------------------'
+  message4:
+    - '&b------------------'
+    - '&aBạn Đã Bị Kick Khỏi Bang Hội!'
+    - '&b------------------'
+  message5:
+    - '&b------------------'
+    - '&6{player_name}&a Đã Bị Kick Ra Khỏi Bang Hội!'
+    - '&b------------------'
+  message6:
+    - '&b------------------'
+    - '&aQuyền Đội Trưởng Của Bang Hội Đã Được Chuyển Qua Cho &6{player_name}&a!'
+    - '&b------------------'
+  message7:
+    - '&b------------------'
+    - '&aBạn Đã Rời Khoi Bang Hội!'
+    - '&b------------------'
+  message8:
+    - '&b------------------'
+    - '&a{player_name} đã rời khỏi Bang Hội!'
+    - '&b------------------'
+  message9:
+    - '&e------------------'
+    - '&c&lĐội Trưởng Đã Giải Tán Bang Hội!'
+    - '&e------------------'
