@@ -166,6 +166,12 @@ public class ListGuildInv implements Listener {
             }
             guild.sendMessage(str.replace("{name}",player.getName()));
         }
-        Cooldown.addPlayer(Bukkit.getOfflinePlayer(UUID.fromString(pPlayer.uuid)),()-> pPlayer.wait = null);
+        Cooldown.addPlayer(Bukkit.getOfflinePlayer(UUID.fromString(pPlayer.uuid)), new Cooldown.Runnable() {
+            @Override
+            public void run(OfflinePlayer player) {
+                PPlayer pPlayer1 = GuildWar2.get().dataStorage.playerStorage.get(player.getUniqueId().toString());
+                pPlayer1.wait = null;
+            }
+        });
     }
 }

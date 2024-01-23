@@ -17,6 +17,8 @@ public class Listeners implements Listener {
     @EventHandler
     public void onClose(InventoryCloseEvent event) {
         PPlayer pPlayer = (GuildWar2.get().dataStorage.playerStorage.get(event.getPlayer().getUniqueId().toString()));
+        if (pPlayer == null)
+            return;
         ListGuildInv.uuids.remove(pPlayer.inventory);
         SelectInv.uuids.remove(pPlayer.inventory);
         SettingInv.uuids.remove(pPlayer.inventory);

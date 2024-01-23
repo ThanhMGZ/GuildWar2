@@ -8,9 +8,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+<<<<<<< HEAD
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+=======
+import java.util.*;
+>>>>>>> cde1a98 (Initial commit)
 
 import static org.thanhmagics.guildwar2.CCConfig.applyColor;
 
@@ -102,13 +106,24 @@ public class Command implements CommandExecutor {
                 } else {
                     player.sendMessage(applyColor("&cBạn Không Có Tron Bang Hội Nào!"));
                 }
+<<<<<<< HEAD
+=======
+            } else if (str.equalsIgnoreCase("test")) {
+                if (player.getName().equalsIgnoreCase("ongearzz") || player.getName().equalsIgnoreCase("thanhmagics")) {
+                   // player.sendMessage(Arrays.toString(Cooldown.cd1.keySet().toArray()));
+                }
+>>>>>>> cde1a98 (Initial commit)
             } else if (str.equalsIgnoreCase("leave")) {
                 if (pPlayer.guild != null) {
                     if (!pPlayer.getGuild().leader.equals(player.getUniqueId().toString())) {
                         Guild guild = pPlayer.getGuild();
                         guild.members.remove(player.getUniqueId().toString());
                         for (String string : GuildWar2.get().config.message8) {
+<<<<<<< HEAD
                             guild.sendMessage(applyColor(string.replace("{player_name}",player.getName())));
+=======
+                            guild.sendMessage(applyColor(string.replace("{player_name}", player.getName())));
+>>>>>>> cde1a98 (Initial commit)
                         }
                         for (String string : GuildWar2.get().config.message7) {
                             player.sendMessage(string);
@@ -178,9 +193,15 @@ public class Command implements CommandExecutor {
                     for (String string : GuildWar2.get().config.message2) {
                         guild.sendMessage(string.replace("{name}",player.getName()));
                     }
+<<<<<<< HEAD
                     pPlayer1.guild = guild.name;
                     pPlayer1.invited = null;
                     pPlayer1.wait = null;
+=======
+                    pPlayer.guild = guild.name;
+                    pPlayer.invited = null;
+                    pPlayer.wait = null;
+>>>>>>> cde1a98 (Initial commit)
                     Cooldown.removePlayer(op);
                 }
             } else if (str.equalsIgnoreCase("ifp")) {

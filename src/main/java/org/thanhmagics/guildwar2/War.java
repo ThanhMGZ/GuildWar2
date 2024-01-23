@@ -209,9 +209,7 @@ public class War implements java.lang.Runnable {
             @Override
             public void run() {
                 if (endwar) {
-                    synchronized (this) {
-                        end();
-                    }
+                    end();
                     this.cancel();
                 }
                 for (Player player : camping.keySet()) {

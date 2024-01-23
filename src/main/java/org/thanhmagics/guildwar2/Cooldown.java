@@ -1,21 +1,17 @@
 package org.thanhmagics.guildwar2;
 
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Cooldown implements java.lang.Runnable {
 
-    private static Map<Long, java.lang.Runnable> cd1 = new HashMap<>();
+    private static Map<Long, Runnable> cd1 = new HashMap<>();
 
     private static Map<OfflinePlayer,Long> cd2 = new HashMap<>();
 
 
-    public static void addPlayer(OfflinePlayer player, java.lang.Runnable runnable) {
+    public static void addPlayer(OfflinePlayer player, Runnable runnable) {
         long ctm = System.currentTimeMillis();
         cd1.put(ctm,runnable);
         cd2.put(player,ctm);
@@ -31,25 +27,28 @@ public class Cooldown implements java.lang.Runnable {
 
     @Override
     public void run() {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-        executorService.submit(() -> {
-            for (Long k : cd1.keySet()) {
-                if (k + 60000 < System.currentTimeMillis()) {
-                    java.lang.Runnable runnable = cd1.get(k);
-                    cd1.remove(k,runnable);
-                    cd2.remove(kbv(k));
-                    runnable.run();
+        new Thread(() -> {
+            while (!GuildWar2.get().getServer().isStopping()) {
+                for (Long k : cd1.keySet()) {
+                    if (k + 10000 < System.currentTimeMillis()) {
+                        Runnable runnable = cd1.get(k);
+                        cd1.remove(k, runnable);
+                        OfflinePlayer player = kbv(k);
+                        cd2.remove(player);
+                        runnable.run(player);
+                    }
                 }
             }
-        });
-        executorService.shutdown();
+        }).start();
     }
 
-    OfflinePlayer kbv(Long v) {
+    public static OfflinePlayer kbv(Long v) {
         for (OfflinePlayer p : cd2.keySet())
             if (cd2.get(p).equals(v))
                 return p;
         return null;
     }
-
+    public abstract static class Runnable {
+        public abstract void run(OfflinePlayer player);
+    }
 }

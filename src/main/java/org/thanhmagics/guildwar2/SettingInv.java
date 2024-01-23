@@ -76,6 +76,10 @@ public class SettingInv implements Listener {
                                     player.sendMessage(applyColor("&cNgười Chơi Này Hiện Không Trực Tuyến!"));
                                     return;
                                 }
+                                if (pPlayer.getGuild().members.contains(op.getUniqueId().toString())) {
+                                    player.sendMessage(applyColor("&cNgười Chơi Này Đã Ở Trong Bang Hội!"));
+                                    return;
+                                }
                                 Player p = (Player) op;
                                 PPlayer p1 = GuildWar2.get().dataStorage.playerStorage.get(p.getUniqueId().toString());
                                 if (p1.invited != null) {
@@ -95,7 +99,13 @@ public class SettingInv implements Listener {
                                     }
                                 }
                                 p1.invited = pPlayer.guild;
-                                Cooldown.addPlayer(p,() -> p1.invited = null);
+                                Cooldown.addPlayer(p, new Cooldown.Runnable() {
+                                    @Override
+                                    public void run(OfflinePlayer player) {
+                                        PPlayer pPlayer1 = GuildWar2.get().dataStorage.playerStorage.get(Bukkit.getOfflinePlayer(UUID.fromString(player.getUniqueId().toString())).getUniqueId().toString());
+                                        pPlayer1.invited = null;
+                                    }
+                                });
                                 player.sendMessage(applyColor("&aĐã Gửi Lời Mời Thành Công!"));
                             } catch (Exception e) {
                                 e.printStackTrace();
